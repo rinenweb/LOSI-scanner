@@ -8,7 +8,7 @@ CONFIG = {
     "accent_insensitive": True
 }
 from scanner.html_utils import normalize_text
-def run(soup, url, keywords=None):
+def run(soup, url, keywords=None, **kwargs):
     if not soup:
         return 0, None
     if not keywords:
