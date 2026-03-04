@@ -46,8 +46,16 @@ def scan_single(url, selected):
     for code in selected:
 
         module = INDICATORS[code]["module"]
+        keywords = None
 
-        res, evidence = module.run(soup, url)
+        if keyword_inputs and code in keyword_inputs:
+            keywords = keyword_inputs[code]
+        
+        res, evidence = module.run(
+            soup,
+            url,
+            keywords=keywords
+        )
 
         row[code] = res
 
