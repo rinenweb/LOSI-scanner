@@ -1,5 +1,4 @@
-
-def run(soup, url):
+def run(soup, url, **kwargs):
     if not soup:
         return 0, None
 
