@@ -1,0 +1,19 @@
+{
+  "environment": [
+    "environment",
+    "climate",
+    "recycling",
+    "waste"
+  ],
+  "transport": [
+    "transport",
+    "bus",
+    "metro",
+    "public transport"
+  ],
+  "procurement": [
+    "procurement",
+    "tender",
+    "bidding"
+  ]
+}
