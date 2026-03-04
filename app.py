@@ -36,10 +36,9 @@ if st.button("Run analysis"):
     redirects = feature_df[feature_df["redirected"] == True]
 
     for _, r in redirects.iterrows():
-
-    st.warning(
-        f"⚠ Redirect detected: {r['municipality']} → {r['final_url']}"
-    )
+        st.warning(
+            f"⚠ Redirect detected: {r['municipality']} → {r['final_url']}"
+        )
 
     csv = feature_df.to_csv(index=False).encode("utf-8")
     st.download_button(
