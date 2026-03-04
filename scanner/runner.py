@@ -1,8 +1,8 @@
-
-import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 from models.indicator_registry import INDICATORS
+from scanner.html_utils import fetch_url
+from concurrent.futures import ThreadPoolExecutor
 
 def run_scan(urls, selected, progress):
 
@@ -11,37 +11,57 @@ def run_scan(urls, selected, progress):
 
     total = len(urls)
 
-    for i, url in enumerate(urls):
+    with ThreadPoolExecutor(max_workers=8) as executor:
 
-        try:
-            r = requests.get(url, timeout=10)
-            soup = BeautifulSoup(r.text, "lxml")
-        except:
-            soup = None
+        futures = [executor.submit(scan_single, url, selected) for url in urls]
 
-        row = {"municipality": url}
+        for i, f in enumerate(futures):
 
-        for code in selected:
+            row, ev = f.result()
 
-            module = INDICATORS[code]["module"]
-            func = module.run
+            feature_rows.append(row)
 
-            result, evidence = func(soup, url)
+            evidence_rows.extend(ev)
 
-            row[code] = result
-
-            if evidence:
-                evidence_rows.append({
-                    "municipality": url,
-                    "indicator": code,
-                    "evidence": evidence
-                })
-
-        feature_rows.append(row)
-
-        progress.progress((i+1)/total)
+            progress.progress((i + 1) / total)
 
     feature_df = pd.DataFrame(feature_rows)
+
     evidence_df = pd.DataFrame(evidence_rows)
 
     return feature_df, evidence_df
+    
+def scan_single(url, selected):
+
+    result = fetch_url(url)
+
+    row = {
+        "municipality": url,
+        "status": result["status"],
+        "redirected": result["redirected"],
+        "final_url": result["final_url"]
+    }
+
+    evidence_rows = []
+
+    if result["status"] != 200 or result["response"] is None:
+        return row, evidence_rows
+
+    soup = BeautifulSoup(result["response"].text, "lxml")
+
+    for code in selected:
+
+        module = INDICATORS[code]["module"]
+
+        res, evidence = module.run(soup, url)
+
+        row[code] = res
+
+        if evidence:
+            evidence_rows.append({
+                "municipality": url,
+                "indicator": code,
+                "evidence": evidence
+            })
+
+    return row, evidence_rows
