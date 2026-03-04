@@ -18,15 +18,32 @@ urls_text = st.text_area(
 st.subheader("Select LOSI Indicators")
 
 selected = []
+keyword_inputs = {}
+
 for code, meta in INDICATORS.items():
     if st.checkbox(f"{code} – {meta['name']}", value=meta.get("default", True)):
         selected.append(code)
+        if "config" in meta and meta["config"]["type"] == "keyword":
+            defaults = meta["config"]["keywords_default"]
+            txt = st.text_area(
+                f"Keywords for indicator {code}",
+                value="\n".join(defaults),
+                height=120
+            )
+            keyword_inputs[code] = [
+                k.strip() for k in txt.split("\n") if k.strip()
+            ]
 
 if st.button("Run analysis"):
     urls = [u.strip() for u in urls_text.split("\n") if u.strip()]
     progress = st.progress(0)
 
-    feature_df, evidence_df = run_scan(urls, selected, progress)
+    feature_df, evidence_df = run_scan(
+    urls,
+    selected,
+    progress,
+    keyword_inputs
+    )
 
     st.subheader("Feature Matrix")
     display_df = feature_df.replace({1: "✓", 0: "✗"})
