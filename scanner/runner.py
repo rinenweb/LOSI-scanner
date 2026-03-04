@@ -4,8 +4,7 @@ from models.indicator_registry import INDICATORS
 from scanner.html_utils import fetch_url
 from concurrent.futures import ThreadPoolExecutor
 
-def run_scan(urls, selected, progress):
-
+def run_scan(urls, selected, progress, keyword_inputs=None):
     feature_rows = []
     evidence_rows = []
 
@@ -16,17 +15,12 @@ def run_scan(urls, selected, progress):
         futures = [executor.submit(scan_single, url, selected) for url in urls]
 
         for i, f in enumerate(futures):
-
             row, ev = f.result()
-
             feature_rows.append(row)
-
             evidence_rows.extend(ev)
-
             progress.progress((i + 1) / total)
 
     feature_df = pd.DataFrame(feature_rows)
-
     evidence_df = pd.DataFrame(evidence_rows)
 
     return feature_df, evidence_df
