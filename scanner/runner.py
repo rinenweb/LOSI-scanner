@@ -12,7 +12,7 @@ def run_scan(urls, selected, progress, keyword_inputs=None):
 
     with ThreadPoolExecutor(max_workers=8) as executor:
 
-        futures = [executor.submit(scan_single, url, selected) for url in urls]
+        futures = [executor.submit(scan_single, url, selected, keyword_inputs) for url in urls]
 
         for i, f in enumerate(futures):
             row, ev = f.result()
@@ -25,8 +25,7 @@ def run_scan(urls, selected, progress, keyword_inputs=None):
 
     return feature_df, evidence_df
     
-def scan_single(url, selected):
-
+def scan_single(url, selected, keyword_inputs):
     result = fetch_url(url)
 
     row = {
