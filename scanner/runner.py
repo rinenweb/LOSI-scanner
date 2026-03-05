@@ -45,6 +45,10 @@ def scan_single(url, selected, keyword_inputs):
 
     for code in selected:
 
+        # normalize indicator code
+        if code.startswith("indicators.i"):
+            code = code.split("i")[-1]
+    
         module = INDICATORS[code]["module"]
         keywords = None
 
