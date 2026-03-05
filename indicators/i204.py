@@ -3,6 +3,7 @@ CONFIG = {
     "description": "The portal displays and works well when accessed through a mobile device (e.g., smartphone or tablet).",
     "crawl": False
 }
+
 def run(pages, url, **kwargs):
     if not pages:
         return 0, None
