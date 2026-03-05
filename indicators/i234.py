@@ -1,4 +1,6 @@
 CONFIG = {
+    "name": "Privacy policy",
+    "description": "Existence of a privacy policy or statement available on the municipal government portal.",
     "type": "keyword",
     "keywords_default": [
         "privacy policy",
