@@ -8,7 +8,6 @@ INDICATOR_DIR = "indicators"
 
 for filename in os.listdir(INDICATOR_DIR):
 
-    # θέλουμε μόνο αρχεία τύπου i206.py
     if not filename.startswith("i") or not filename.endswith(".py"):
         continue
 
@@ -17,16 +16,14 @@ for filename in os.listdir(INDICATOR_DIR):
 
     module = importlib.import_module(f"{INDICATOR_DIR}.{module_name}")
 
-    # default name
-    name = f"Indicator {indicator_code}"
-
-    # αν υπάρχει CONFIG μπορούμε να πάρουμε metadata
-    config = getattr(module, "CONFIG", None)
-
-    description = None
-
-    if config and "description" in config:
-        description = config["description"]
+    # πάρε CONFIG αν υπάρχει
+    config = getattr(module, "CONFIG", {})
+    
+    # όνομα indicator
+    name = config.get("name", f"Indicator {indicator_code}")
+    
+    # description
+    description = config.get("description")
     
     INDICATORS[indicator_code] = {
         "name": name,
