@@ -1,6 +1,6 @@
 CONFIG = {
     "name": "Internal search mechanism",
-    "description": "A search bar on the main web page of the municipal government portal."
+    "description": "A search bar on the main web page of the municipal government portal.",
     "crawl": True
 }
 def run(pages, url, **kwargs):
