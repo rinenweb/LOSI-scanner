@@ -33,7 +33,7 @@ for code, meta in INDICATORS.items():
 
         selected.append(code)
 
-        if "config" in meta and meta["config"]["type"] == "keyword":
+        if meta.get("config", {}).get("type") == "keyword":
 
             defaults = meta["config"]["keywords_default"]
 
