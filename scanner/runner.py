@@ -44,10 +44,14 @@ def scan_single(url, selected, keyword_inputs):
     pages = crawl_site(url, max_pages=10)
 
     for code in selected:
-
-        # normalize indicator code
-        if code.startswith("indicators.i"):
-            code = code.split("i")[-1]
+    
+        code = str(code)
+    
+        if code not in INDICATORS:
+            code = code.replace("indicators.i", "")
+    
+        if code not in INDICATORS:
+            continue
     
         module = INDICATORS[code]["module"]
         keywords = None
