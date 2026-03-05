@@ -6,7 +6,7 @@ CONFIG = {
 def run(pages, url, **kwargs):
     if not pages:
         return 0, None
-
+    soup = pages[0]["soup"]
     meta = soup.find("meta", attrs={"name":"viewport"})
 
     if meta:
