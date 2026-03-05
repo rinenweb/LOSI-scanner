@@ -1,4 +1,8 @@
-SOCIAL = ["facebook.com","twitter.com","youtube.com","instagram.com"]
+CONFIG = {
+    "name": "Social networking features",
+    "description": "Presence of links to social networking platforms such as Facebook, Twitter, YouTube or Instagram."
+}
+SOCIAL = ["facebook.com","twitter.com","youtube.com","instagram.com","linkedin.com"]
 
 def run(soup, url, **kwargs):
     if not soup:
