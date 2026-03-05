@@ -40,7 +40,8 @@ def scan_single(url, selected, keyword_inputs):
     if result["status"] != 200 or result["response"] is None:
         return row, evidence_rows
 
-    soup = BeautifulSoup(result["response"].text, "lxml")
+    from scanner.crawler import crawl_site
+    pages = crawl_site(url, max_pages=10)
 
     for code in selected:
 
@@ -51,7 +52,7 @@ def scan_single(url, selected, keyword_inputs):
             keywords = keyword_inputs[code]
         
         res, evidence = module.run(
-            soup,
+            pages,
             url,
             keywords=keywords
         )
