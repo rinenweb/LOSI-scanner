@@ -11,6 +11,7 @@ CONFIG = {
     "accent_insensitive": True
 }
 from scanner.html_utils import normalize_text
+
 def run(pages, url, keywords=None, **kwargs):
 
     if not keywords:
