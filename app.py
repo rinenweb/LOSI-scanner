@@ -18,19 +18,27 @@ urls_text = st.text_area(
 
 st.subheader("Select LOSI Indicators")
 
+select_all = st.toggle("Select / Deselect all indicators", value=True)
+
 selected = []
 keyword_inputs = {}
 
 for code, meta in INDICATORS.items():
-    if st.checkbox(f"{code} – {meta['name']}", value=meta.get("default", True)):
+
+    if st.checkbox(f"{code} – {meta['name']}", value=select_all):
+
         selected.append(code)
+
         if "config" in meta and meta["config"]["type"] == "keyword":
+
             defaults = meta["config"]["keywords_default"]
+
             txt = st.text_area(
                 f"Keywords for indicator {code}",
                 value="\n".join(defaults),
                 height=120
             )
+
             keyword_inputs[code] = [
                 k.strip() for k in txt.split("\n") if k.strip()
             ]
