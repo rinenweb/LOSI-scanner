@@ -1,6 +1,7 @@
-
 import streamlit as st
 import pandas as pd
+import json
+import datetime
 from scanner.runner import run_scan
 from models.indicator_registry import INDICATORS
 
@@ -37,6 +38,13 @@ for code, meta in INDICATORS.items():
 if st.button("Run analysis"):
     urls = [u.strip() for u in urls_text.split("\n") if u.strip()]
     progress = st.progress(0)
+
+    config = {
+    "timestamp": datetime.datetime.utcnow().isoformat(),
+    "urls": urls,
+    "indicators": selected,
+    "keywords": keyword_inputs
+    }
 
     feature_df, evidence_df = run_scan(
     urls,
@@ -75,6 +83,15 @@ if st.button("Run analysis"):
         "losi_evidence.csv",
         "text/csv"
     )
+
+    config_json = json.dumps(config, indent=2, ensure_ascii=False)
+    st.download_button(
+    "Download configuration (JSON)",
+    config_json,
+    "losi_configuration.json",
+    "application/json"
+    )
+    
 st.markdown(
     """
     ---
