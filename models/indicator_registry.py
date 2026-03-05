@@ -34,3 +34,5 @@ for filename in os.listdir(INDICATOR_DIR):
         INDICATORS[indicator_code]["config"] = config
 
 INDICATORS = dict(sorted(INDICATORS.items()))
+print("Loading indicator:", module_name)
+module = importlib.import_module(f"{INDICATOR_DIR}.{module_name}")
