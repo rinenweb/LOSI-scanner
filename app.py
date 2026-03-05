@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import json
-import datetime
+from datetime import datetime, UTC
 from scanner.runner import run_scan
 from models.indicator_registry import INDICATORS
 
@@ -52,7 +52,7 @@ if st.button("Run analysis"):
     progress = st.progress(0)
 
     config = {
-    "timestamp": datetime.datetime.utcnow().isoformat(),
+    "timestamp": datetime.now(UTC).isoformat(),
     "urls": urls,
     "indicators": selected,
     "keywords": keyword_inputs
