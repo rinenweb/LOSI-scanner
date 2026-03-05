@@ -5,10 +5,14 @@ CONFIG = {
 }
 
 def run(pages, url, **kwargs):
-   for p in pages:
+
+    for p in pages:
+
         soup = p["soup"]
+
         if soup.find("input", {"type": "search"}):
             return 1, p["url"]
+
         if soup.find("form", {"role": "search"}):
             return 1, p["url"]
 
