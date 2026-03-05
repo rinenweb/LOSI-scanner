@@ -1,3 +1,7 @@
+CONFIG = {
+    "name": "Internal search mechanism",
+    "description": "A search bar on the main web page of the municipal government portal."
+}
 def run(soup, url, **kwargs):
     if not soup:
         return 0, None
