@@ -1,6 +1,6 @@
 CONFIG = {
     "name": "Mobile device accessibility",
-    "description": "The portal displays and works well when accessed through a mobile device (e.g., smartphone or tablet)."
+    "description": "The portal displays and works well when accessed through a mobile device (e.g., smartphone or tablet).",
     "crawl": False
 }
 def run(pages, url, **kwargs):
