@@ -75,7 +75,7 @@ if st.button("Run analysis"):
         "losi_evidence.csv",
         "text/csv"
     )
-    st.markdown(
+st.markdown(
     """
     ---
     <small>
