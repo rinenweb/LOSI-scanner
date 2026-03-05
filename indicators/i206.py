@@ -11,4 +11,5 @@ def run(pages, url, **kwargs):
             return 1, p["url"]
         if soup.find("form", {"role": "search"}):
             return 1, p["url"]
-    return 0, None
+
+return 0, None
