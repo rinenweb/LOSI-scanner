@@ -1,9 +1,34 @@
-from indicators import i206, i214, i234, i273, i204
+import os
+import importlib
+import re
 
-INDICATORS = {
-    "206": {"name": "Internal search mechanism", "module": i206},
-    "214": {"name": "Contact details", "module": i214},
-    "234": {"name": "Privacy policy", "module": i234, "config": i234.CONFIG},
-    "273": {"name": "Social networking features", "module": i273},
-    "204": {"name": "Mobile device accessibility", "module": i204},
-}
+INDICATORS = {}
+
+INDICATOR_DIR = "indicators"
+
+for filename in os.listdir(INDICATOR_DIR):
+
+    # θέλουμε μόνο αρχεία τύπου i206.py
+    if not filename.startswith("i") or not filename.endswith(".py"):
+        continue
+
+    module_name = filename[:-3]   # i206
+    indicator_code = module_name[1:]  # 206
+
+    module = importlib.import_module(f"{INDICATOR_DIR}.{module_name}")
+
+    # default name
+    name = f"Indicator {indicator_code}"
+
+    # αν υπάρχει CONFIG μπορούμε να πάρουμε metadata
+    config = getattr(module, "CONFIG", None)
+
+    INDICATORS[indicator_code] = {
+        "name": name,
+        "module": module
+    }
+
+    if config:
+        INDICATORS[indicator_code]["config"] = config
+
+INDICATORS = dict(sorted(INDICATORS.items()))
