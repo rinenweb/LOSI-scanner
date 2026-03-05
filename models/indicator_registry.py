@@ -23,8 +23,14 @@ for filename in os.listdir(INDICATOR_DIR):
     # αν υπάρχει CONFIG μπορούμε να πάρουμε metadata
     config = getattr(module, "CONFIG", None)
 
+    description = None
+
+    if config and "description" in config:
+        description = config["description"]
+    
     INDICATORS[indicator_code] = {
         "name": name,
+        "description": description,
         "module": module
     }
 
