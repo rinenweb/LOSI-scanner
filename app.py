@@ -25,7 +25,11 @@ keyword_inputs = {}
 
 for code, meta in INDICATORS.items():
 
-    if st.checkbox(f"{code} – {meta['name']}", value=select_all):
+    if st.checkbox(
+    f"{code} – {meta['name']}",
+    value=select_all,
+    help=meta.get("description")
+    ):
 
         selected.append(code)
 
