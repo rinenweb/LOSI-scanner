@@ -3,6 +3,7 @@ CONFIG = {
     "description": "A search bar on the main web page of the municipal government portal.",
     "crawl": True
 }
+
 def run(pages, url, **kwargs):
    for p in pages:
         soup = p["soup"]
