@@ -1,7 +1,7 @@
 CONFIG = {
     "name": "Social networking features",
     "description": "Presence of links to social networking platforms such as Facebook, Twitter, YouTube or Instagram."
-    "crawl": True,
+    "crawl": True
 }
 SOCIAL = ["facebook.com","twitter.com","youtube.com","instagram.com","linkedin.com"]
 
