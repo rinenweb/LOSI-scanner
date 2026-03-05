@@ -41,7 +41,7 @@ def scan_single(url, selected, keyword_inputs):
         return row, evidence_rows
 
     from scanner.crawler import crawl_site
-    pages = crawl_site(url, max_pages=10)
+    pages = crawl_site(url, max_pages=5)
 
     for code in selected:
     
