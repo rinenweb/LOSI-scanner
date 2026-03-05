@@ -75,3 +75,13 @@ if st.button("Run analysis"):
         "losi_evidence.csv",
         "text/csv"
     )
+    st.markdown(
+"""
+---
+<small>
+This application is a work in progress developed within the Postgraduate Programme <b>"e-Government"</b> of the University of the Aegean. It aims to audit municipal websites using the Local Online Service Index (LOSI) indicators.<br><br>
+The analysis is fully rule-based and methodologically transparent. The source code is openly available at <a href="https://github.com/rinenweb/LOSI-scanner">GitHub</a>.
+</small>
+""",
+unsafe_allow_html=True
+)
