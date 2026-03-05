@@ -1,6 +1,6 @@
 CONFIG = {
     "name": "Contact details",
-    "description": "Evidence of a 'contact us' feature including phone numbers, email addresses, physical addresses or contact forms."
+    "description": "Evidence of a 'contact us' feature including phone numbers, email addresses, physical addresses or contact forms.",
     "crawl": True
 }
 import re
