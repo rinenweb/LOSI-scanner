@@ -3,7 +3,8 @@ import unicodedata
 from urllib.parse import urlparse
 
 HEADERS = {
-    "User-Agent": "LOSI-Portal-Scanner"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 }
 
 def same_domain(url1, url2):
@@ -18,7 +19,7 @@ def fetch_url(url, timeout=10):
         r = requests.get(
             url,
             headers=HEADERS,
-            timeout=timeout,
+            timeout=10,
             allow_redirects=True
         )
 
