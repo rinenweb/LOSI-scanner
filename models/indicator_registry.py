@@ -1,6 +1,5 @@
 import os
 import importlib
-import re
 
 INDICATORS = {}
 
