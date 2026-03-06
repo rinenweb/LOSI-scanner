@@ -18,7 +18,7 @@ urls_text = st.text_area(
 
 st.subheader("Select LOSI Indicators")
 
-select_all = st.toggle("Select / Deselect all indicators", value=True)
+select_all = st.toggle("Select / Deselect all indicators", value=False)
 
 selected = []
 keyword_inputs = {}
